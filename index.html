@@ -4,24 +4,55 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>World clock</title>
-  </head>
-  <link rel="stylesheet" href="src/style.css" />
-  <script src="src/script.js"></script>
+    <link rel="stylesheet" href="src/style.css" />
+    <script src="src/script.js"></script>
+</head>
   <body>
-   <div class="world-clock-container">
-     <h1>World Clock</h1>
-    <footer>
-      This project is coded by
-      <a href="https://github.com/Sai-S-Mc" target="_blank">Sai Satti</a>, is
-      open-sourced on
-      <a href="https://github.com/Sai-S-Mc/world-clock-project" target="_blank"
-        >GitHub</a
-      >
-      and hosted on
-      <a href="https://world-clock-project-by-sai.netlify.app/" target="_blank"
-        >Netlify</a
-      >
-    </footer>
-   </div>
+    <div class="world-clock-container">
+      <h1>World Clock</h1>
+      <select id="select-city">
+        <option value="#">Select a city</option>
+        <option value="">Toronto</option>
+        <option value="">London</option>
+        <option value="">Paris</option>
+      </select>
+      <select id="time-format">
+        <option value="#">Select a time format</option>
+        <option value="">12 hour clock</option>
+        <option value="">24 hour clock</option>
+      </select>
+      <div class="cities">
+        <div class="each-city">
+          <div class="city-and-date">
+            <h2>Toronto, Canada</h2>
+            <div>Sunday Dec 5th 2024</div>
+          </div>
+          <div>02:15:23 PM</div>
+        </div>
+        <div class="each-city">
+          <div class="city-and-date">
+            <h2>London, United Kingdom</h2>
+            <div>Sunday Dec 5th 2024</div>
+          </div>
+          <div>02:15:23 PM</div>
+        </div>
+      </div>
+      <footer>
+        This ⌚ project was coded by
+        <a href="https://github.com/Sai-S-Mc" target="_blank">Sai Satti</a>, is
+        open-sourced on
+        <a
+          href="https://github.com/Sai-S-Mc/world-clock-project"
+          target="_blank"
+          >GitHub</a
+        >
+        and hosted on
+        <a
+          href="https://world-clock-project-by-sai.netlify.app/"
+          target="_blank"
+          >Netlify</a
+        >
+      </footer>
+    </div>
   </body>
 </html>
