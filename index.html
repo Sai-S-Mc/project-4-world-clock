@@ -6,53 +6,57 @@
     <title>World clock</title>
     <link rel="stylesheet" href="src/style.css" />
     <script src="src/script.js"></script>
-</head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
   <body>
     <div class="world-clock-container">
-      <h1>World Clock</h1>
-      <select id="select-city">
-        <option value="#">Select a city</option>
-        <option value="">Toronto</option>
-        <option value="">London</option>
-        <option value="">Paris</option>
-      </select>
-      <select id="time-format">
-        <option value="#">Select a time format</option>
-        <option value="">12 hour clock</option>
-        <option value="">24 hour clock</option>
-      </select>
+      <header>
+        <h1>World Clock</h1>
+        <select id="select-city">
+          <option value="#">Select a city</option>
+          <option value="">Toronto</option>
+          <option value="">London</option>
+          <option value="">Paris</option>
+        </select>
+        <select id="select-time-format">
+          <option value="#">Select a time format</option>
+          <option value="">12 hour clock</option>
+          <option value="">24 hour clock</option>
+        </select>
+      </header>
       <div class="cities">
         <div class="each-city">
           <div class="city-and-date">
             <h2>Toronto, Canada</h2>
-            <div>Sunday Dec 5th 2024</div>
+            <div class="date">Sunday Dec 5th 2024</div>
           </div>
-          <div>02:15:23 PM</div>
+          <div class="time">02:15:23 <small>PM</small></div>
         </div>
         <div class="each-city">
           <div class="city-and-date">
-            <h2>London, United Kingdom</h2>
-            <div>Sunday Dec 5th 2024</div>
+            <h2>Toronto, Canada</h2>
+            <div class="date">Sunday Dec 5th 2024</div>
           </div>
-          <div>02:15:23 PM</div>
+          <div class="time">02:15:23 <small>PM</small></div>
         </div>
       </div>
-      <footer>
-        This ⌚ project was coded by
-        <a href="https://github.com/Sai-S-Mc" target="_blank">Sai Satti</a>, is
-        open-sourced on
-        <a
-          href="https://github.com/Sai-S-Mc/world-clock-project"
-          target="_blank"
-          >GitHub</a
-        >
-        and hosted on
-        <a
-          href="https://world-clock-project-by-sai.netlify.app/"
-          target="_blank"
-          >Netlify</a
-        >
-      </footer>
     </div>
+    <footer>
+      This ⌚ project was coded by
+      <a href="https://github.com/Sai-S-Mc" target="_blank">Sai Satti</a>, is
+      open-sourced on
+      <a href="https://github.com/Sai-S-Mc/world-clock-project" target="_blank"
+        >GitHub</a
+      >
+      and hosted on
+      <a href="https://world-clock-project-by-sai.netlify.app/" target="_blank"
+        >Netlify</a
+      >
+    </footer>
   </body>
 </html>
