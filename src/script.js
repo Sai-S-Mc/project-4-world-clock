@@ -9,6 +9,18 @@ function updateTime() {
     );
   }
 
+  let longyearbyenElement = document.querySelector("#longyearbyen-time");
+  if (longyearbyenElement) {
+    let longyearbyenDateElement = longyearbyenElement.querySelector(".date");
+    let longyearbyenTimeElement = longyearbyenElement.querySelector(".time");
+    longyearbyenDateElement.innerHTML = moment()
+      .tz("Arctic/longyearbyen")
+      .format("dddd, MMM D, YYYY");
+    longyearbyenTimeElement.innerHTML = moment()
+      .tz("Arctic/longyearbyen")
+      .format("h:mm:ss:SSS [<small>]A[</small>]");
+  }
+
   let melbourneElement = document.querySelector("#melbourne-time");
   if (melbourneElement) {
     let melbourneDateElement = melbourneElement.querySelector(".date");
@@ -40,7 +52,7 @@ function handleSelection(event) {
         .format("h:mm:ss")} <small>${moment()
         .tz(timeZone)
         .format("A")}</small></div>
-          </div>`;
+          </div><a href="/" class="homepage">Back to homepage</a>`;
     }
 }
 
