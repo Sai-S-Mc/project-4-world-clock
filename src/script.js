@@ -21,29 +21,31 @@ function updateTime() {
       .format("h:mm:ss:SSS [<small>]A[</small>]");
   }
 }
-updateTime();
-setInterval(updateTime, 10);
 
 function handleSelection(event) {
   let timeZone = event.target.value;
-  if (timeZone.length > 1) {
-    let cityName = timeZone.replace("_", " ").split("/")[1];
-    let cityElement = document.querySelector("#cities");
-    cityElement.innerHTML= `<div class="each-city">
-                <div class="city-and-date">
-                  <h2>${cityName}</h2>
-                  <div class="date">${moment()
-                    .tz(timeZone)
-                    .format("dddd, MMM D, YYYY")}</div>
-                </div>
-                <div class="time">${moment()
-                  .tz(timeZone)
-                  .format("h:mm:ss")} <small>${moment()
-      .tz(timeZone)
-      .format("A")}</small></div>
-            </div>`;
+  if (timeZone === "current"){
+    timeZone = moment.tz.guess();
   }
+    if (timeZone.length > 1) {
+      let cityName = timeZone.replace("_", " ").split("/")[1];
+      let cityElement = document.querySelector("#cities");
+      cityElement.innerHTML = `<div class="each-city">
+    <div class="city-and-date">
+    <h2>${cityName}</h2>
+    <div class="date">${moment().tz(timeZone).format("dddd, MMM D, YYYY")}</div>
+      </div>
+      <div class="time">${moment()
+        .tz(timeZone)
+        .format("h:mm:ss")} <small>${moment()
+        .tz(timeZone)
+        .format("A")}</small></div>
+          </div>`;
+    }
 }
 
 let selectCityElement = document.querySelector("#select-city");
 selectCityElement.addEventListener("change", handleSelection);
+
+updateTime();
+setInterval(updateTime, 10);
