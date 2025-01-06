@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>World clock</title>
     <link rel="stylesheet" href="src/style.css" />
-    <script src="src/script.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap"
-      rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap"
+    rel="stylesheet"
     />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.46/moment-timezone-with-data-1970-2030.min.js"></script>
   </head>
   <body>
     <div class="world-clock-container">
@@ -30,16 +32,16 @@
         </select>
       </header>
       <div class="cities">
-        <div class="each-city">
+        <div class="each-city" id="toronto-time">
           <div class="city-and-date">
             <h2>Toronto, Canada</h2>
             <div class="date">Sunday Dec 5th 2024</div>
           </div>
           <div class="time">02:15:23 <small>PM</small></div>
         </div>
-        <div class="each-city">
+         <div class="each-city" id="melbourne-time">
           <div class="city-and-date">
-            <h2>Toronto, Canada</h2>
+            <h2>Melbourne, Australia</h2>
             <div class="date">Sunday Dec 5th 2024</div>
           </div>
           <div class="time">02:15:23 <small>PM</small></div>
@@ -51,12 +53,13 @@
       <a href="https://github.com/Sai-S-Mc" target="_blank">Sai Satti</a>, is
       open-sourced on
       <a href="https://github.com/Sai-S-Mc/world-clock-project" target="_blank"
-        >GitHub</a
+      >GitHub</a
       >
       and hosted on
       <a href="https://world-clock-project-by-sai.netlify.app/" target="_blank"
-        >Netlify</a
+      >Netlify</a
       >
     </footer>
+    <script src="src/script.js"></script>
   </body>
 </html>

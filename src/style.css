@@ -4,7 +4,7 @@ body {
 }
 .world-clock-container {
   background-color: white;
-  max-width: 600px;
+  max-width: 640px;
   margin: 60px auto;
   border-radius: 15px;
   box-shadow: 5px 5px 10px rgba(128, 128, 128, 0.3);
@@ -22,8 +22,8 @@ select {
   background-color: rgba(221, 221, 221, 0.866);
   color: rgba(0, 0, 0, 0.886);
 }
-select:hover{
-    cursor:pointer;
+select:hover {
+  cursor: pointer;
 }
 #select-city {
   width: 30%;
@@ -37,7 +37,7 @@ select:hover{
 }
 .each-city {
   margin: 30px 10px;
-  padding: 15px 20px;
+  padding: 15px 20px 20px;
   display: flex;
   justify-content: space-between;
   background-color: rgb(174 174 174 / 40%);
@@ -46,6 +46,10 @@ select:hover{
 }
 h2 {
   margin: 0;
+  font-size: 22px;
+}
+.city-and-date{
+  margin-right: 10px;
 }
 .date {
   color: rgba(0, 0, 0, 0.7);
@@ -53,14 +57,16 @@ h2 {
   padding-left: 5px;
 }
 .time {
-  margin-top: 6px;
-  font-size: 33px;
+  margin-top: 4px;
+  font-size: 31px;
   font-weight: 800;
+  font-family: "Roboto Mono", serif;
 }
 small {
   font-size: 18px;
   position: relative;
   top: -5px;
+  left:-6px;
 }
 footer {
   font-size: 14px;
@@ -73,9 +79,9 @@ footer a {
   color: rgba(0, 0, 0, 0.967);
   transition: all ease-in-out 350ms;
 }
-footer a:hover{
-    font-size: 14.3px;
-    cursor: pointer;
-    color: rgba(30, 30, 30, 0.903);
-    text-decoration: none;
+footer a:hover {
+  font-size: 14.3px;
+  cursor: pointer;
+  color: rgba(30, 30, 30, 0.903);
+  text-decoration: none;
 }
