@@ -20,13 +20,18 @@ select {
   padding: 10px 10px;
   border-radius: 5px;
   background-color: rgba(221, 221, 221, 0.866);
-  color: rgba(0, 0, 0, 0.886);
+  color: rgba(0, 0, 0, 0.7);
+  font-weight: 600;
 }
 select:hover {
   cursor: pointer;
 }
+#select-time-format {
+  margin-right: 5px;
+  width: 30%;
+}
 #select-city {
-  width: 50%;
+  width: 30%;
 }
 .cities {
   padding: 15px 5px;
@@ -69,11 +74,11 @@ small {
   font-size: 13.5px;
   font-weight: 600;
   color: rgba(0, 0, 0, 0.9);
-  padding:10px 0;
+  padding: 10px 0;
   transition: all ease-in-out 350ms;
 }
-.homepage:hover{
-  color:black;
+.homepage:hover {
+  color: black;
   font-size: 13.7px;
 }
 footer {
