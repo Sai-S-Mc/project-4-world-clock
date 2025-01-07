@@ -1,12 +1,14 @@
-function updateTime() {
+function homepage12HrDisplay() {
   let torontoElement = document.querySelector("#toronto-time");
   if (torontoElement) {
     let torontoDateElement = torontoElement.querySelector(".date");
     let torontoTimeElement = torontoElement.querySelector(".time");
-    torontoDateElement.innerHTML = moment().format("dddd, MMM D, YYYY");
-    torontoTimeElement.innerHTML = moment().format(
-      "h:mm:ss:SSS [<small>]A[</small>]"
-    );
+    torontoDateElement.innerHTML = moment()
+      .tz("America/Toronto")
+      .format("dddd, MMM D, YYYY");
+    torontoTimeElement.innerHTML = moment()
+      .tz("America/Toronto")
+      .format("h:mm:ss:SSS [<small>]A[</small>]");
   }
 
   let melbourneElement = document.querySelector("#melbourne-time");
@@ -14,11 +16,11 @@ function updateTime() {
     let melbourneDateElement = melbourneElement.querySelector(".date");
     let melbourneTimeElement = melbourneElement.querySelector(".time");
     melbourneDateElement.innerHTML = moment()
-    .tz("Australia/Melbourne")
-    .format("dddd, MMM D, YYYY");
+      .tz("Australia/Melbourne")
+      .format("dddd, MMM D, YYYY");
     melbourneTimeElement.innerHTML = moment()
-    .tz("Australia/Melbourne")
-    .format("h:mm:ss:SSS [<small>]A[</small>]");
+      .tz("Australia/Melbourne")
+      .format("h:mm:ss:SSS [<small>]A[</small>]");
   }
 
   let longyearbyenElement = document.querySelector("#longyearbyen-time");
@@ -32,6 +34,54 @@ function updateTime() {
       .tz("Arctic/longyearbyen")
       .format("h:mm:ss:SSS [<small>]A[</small>]");
   }
+  let timeFormatLinkElement = document.querySelector("#time-format-link");
+  timeFormatLinkElement.classList.add("time-format-link");
+  timeFormatLinkElement.innerHTML = `Switch to 24 Hour Format`;
+  timeFormatLinkElement.removeEventListener("click", homepage12HrDisplay);
+  timeFormatLinkElement.addEventListener("click", homepage24HrDisplay);
+}
+
+function homepage24HrDisplay(event) {
+  let torontoElement = document.querySelector("#toronto-time");
+  if (torontoElement) {
+    let torontoDateElement = torontoElement.querySelector(".date");
+    let torontoTimeElement = torontoElement.querySelector(".time");
+    torontoDateElement.innerHTML = moment()
+      .tz("America/Toronto")
+      .format("dddd, MMM D, YYYY");
+    torontoTimeElement.innerHTML = moment()
+      .tz("America/Toronto")
+      .format("H:mm:ss:SSS");
+  }
+
+  let melbourneElement = document.querySelector("#melbourne-time");
+  if (melbourneElement) {
+    let melbourneDateElement = melbourneElement.querySelector(".date");
+    let melbourneTimeElement = melbourneElement.querySelector(".time");
+    melbourneDateElement.innerHTML = moment()
+      .tz("Australia/Melbourne")
+      .format("dddd, MMM D, YYYY");
+    melbourneTimeElement.innerHTML = moment()
+      .tz("Australia/Melbourne")
+      .format("H:mm:ss:SSS");
+  }
+
+  let longyearbyenElement = document.querySelector("#longyearbyen-time");
+  if (longyearbyenElement) {
+    let longyearbyenDateElement = longyearbyenElement.querySelector(".date");
+    let longyearbyenTimeElement = longyearbyenElement.querySelector(".time");
+    longyearbyenDateElement.innerHTML = moment()
+      .tz("Arctic/longyearbyen")
+      .format("dddd, MMM D, YYYY");
+    longyearbyenTimeElement.innerHTML = moment()
+      .tz("Arctic/longyearbyen")
+      .format("H:mm:ss:SSS");
+  }
+
+  let timeFormatLinkElement = document.querySelector("#time-format-link");
+  timeFormatLinkElement.innerHTML = `Switch to 12 Hour Format`;
+  timeFormatLinkElement.removeEventListener("click", homepage24HrDisplay);
+  timeFormatLinkElement.addEventListener("click", homepage12HrDisplay);
 }
 
 function twentyFourHourClock(event) {
@@ -50,6 +100,8 @@ function twentyFourHourClock(event) {
       <div class="time">${moment().tz(timeZone).format("H:mm:ss")} 
           </div></div><a href="/" class="homepage">Back to homepage</a>`;
   }
+  let timeFormatLinkElement = document.querySelector("#time-format-link");
+  timeFormatLinkElement.remove("#time-format-link");
 }
 
 function twelveHourClock(event) {
@@ -72,6 +124,8 @@ function twelveHourClock(event) {
       .format("A")}</small></div>
           </div><a href="/" class="homepage">Back to homepage</a>`;
   }
+  let timeFormatLinkElement = document.querySelector("#time-format-link");
+  timeFormatLinkElement.remove("#time-format-link");
 }
 
 function displaySelectedCity(event) {
@@ -81,8 +135,7 @@ function displaySelectedCity(event) {
       let selectCityElement = document.querySelector("#select-city");
       selectCityElement.removeEventListener("change", twentyFourHourClock);
       selectCityElement.addEventListener("change", twelveHourClock);
-    } 
-    else {
+    } else {
       let selectCityElement = document.querySelector("#select-city");
       selectCityElement.removeEventListener("change", twelveHourClock);
       selectCityElement.addEventListener("change", twentyFourHourClock);
@@ -93,5 +146,5 @@ function displaySelectedCity(event) {
 let selectTimeFormatElement = document.querySelector("#select-time-format");
 selectTimeFormatElement.addEventListener("change", displaySelectedCity);
 
-updateTime();
-setInterval(updateTime, 10);
+homepage12HrDisplay();
+// setInterval(homepage12HrDisplay, 10);
