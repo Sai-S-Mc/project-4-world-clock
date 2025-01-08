@@ -1,4 +1,20 @@
+function userGreeting(){
+  let userGreeting = document.querySelector("#user-greeting");
+  let userTimeZone = moment.tz.guess();
+  let userHour = moment().tz(userTimeZone).format("H");
+  if (userHour >= 5 && userHour < 12) {
+    userGreeting.innerHTML = "Good Morning.";
+  } else if (userHour >= 12 && userHour < 17) {
+    userGreeting.innerHTML = "Good Afternoon.";
+  } else if (userHour >= 17 && userHour < 21) {
+    userGreeting.innerHTML = "Good Evening.";
+  } else {
+    userGreeting.innerHTML = "Good Night.";
+  }
+}
+
 function homepage12HrDisplay() {
+  userGreeting();
   let torontoElement = document.querySelector("#toronto-time");
   if (torontoElement) {
     let torontoDateElement = torontoElement.querySelector(".date");

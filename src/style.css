@@ -35,6 +35,12 @@ select:hover {
 #select-city {
   width: 30%;
 }
+.user-greeting {
+  margin: 20px auto -10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.7);
+}
 .cities {
   padding: 15px 5px 0;
 }
