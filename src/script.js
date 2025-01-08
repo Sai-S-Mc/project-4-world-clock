@@ -35,7 +35,7 @@ function homepage12HrDisplay() {
       .format("h:mm:ss:SSS [<small>]A[</small>]");
   }
   let timeFormatLinkElement = document.querySelector("#time-format-link");
-  timeFormatLinkElement.classList.add("time-format-link");
+  timeFormatLinkElement.classList.add("switch-page");
   timeFormatLinkElement.innerHTML = `Switch to 24 Hour Format`;
   timeFormatLinkElement.removeEventListener("click", homepage12HrDisplay);
   timeFormatLinkElement.addEventListener("click", homepage24HrDisplay);
@@ -98,10 +98,11 @@ function twentyFourHourClock(event) {
     <div class="date">${moment().tz(timeZone).format("dddd, MMM D, YYYY")}</div>
       </div>
       <div class="time">${moment().tz(timeZone).format("H:mm:ss")} 
-          </div></div><a href="/" class="homepage">Back to homepage</a>`;
+          </div></div>`;
+    let timeFormatLinkElement = document.querySelector("#time-format-link");
+    timeFormatLinkElement.innerHTML = `Back to Homepage`;
+    timeFormatLinkElement.setAttribute("href", "/");
   }
-  let timeFormatLinkElement = document.querySelector("#time-format-link");
-  timeFormatLinkElement.remove("#time-format-link");
 }
 function twelveHourClock(event) {
   let timeZone = event.target.value;
@@ -121,10 +122,11 @@ function twelveHourClock(event) {
         .format("h:mm:ss")} <small>${moment()
       .tz(timeZone)
       .format("A")}</small></div>
-          </div><a href="/" class="homepage">Back to homepage</a>`;
+          </div>`;
+    let timeFormatLinkElement = document.querySelector("#time-format-link");
+    timeFormatLinkElement.innerHTML = `Back to Homepage`;
+    timeFormatLinkElement.setAttribute("href","/");
   }
-  let timeFormatLinkElement = document.querySelector("#time-format-link");
-  timeFormatLinkElement.remove("#time-format-link");
 }
 
 function displaySelectedCity(event) {

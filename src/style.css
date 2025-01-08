@@ -70,8 +70,7 @@ small {
   top: -5px;
   left: -6px;
 }
-.time-format-link,
-.homepage {
+.switch-page {
   display: block;
   text-align: center;
   font-size: 13.5px;
@@ -80,8 +79,7 @@ small {
   padding-bottom: 30px;
   transition: all ease-in-out 350ms;
 }
-.time-format-link:hover,
-.homepage:hover {
+.switch-page:hover {
   color: black;
   font-size: 13.7px;
 }
