@@ -84,7 +84,7 @@ small {
   font-size: 13.7px;
 }
 footer {
-  margin:0 auto 30px;
+  margin: 0 auto 30px;
   text-align: center;
   font-size: 14px;
   color: rgba(0, 0, 0, 0.7);
@@ -93,6 +93,15 @@ footer {
   max-width: 600px;
   border-radius: 15px;
   box-shadow: 5px 5px 10px rgba(128, 128, 128, 0.3);
+}
+footer .clock-icon {
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 19px;
+  position: relative;
+  bottom: -4px;
+  background-color: #80808066;
+  border-radius: 13px;
+  box-shadow: 0.5px 0.5px 5px #41404087;
 }
 footer a {
   font-weight: 600;
