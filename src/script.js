@@ -8,7 +8,7 @@ function homepage12HrDisplay() {
       .format("dddd, MMM D, YYYY");
     torontoTimeElement.innerHTML = moment()
       .tz("America/Toronto")
-      .format("h:mm:ss:SSS [<small>]A[</small>]");
+      .format("h:mm:ss [<small>]A[</small>]");
   }
 
   let melbourneElement = document.querySelector("#melbourne-time");
@@ -20,7 +20,7 @@ function homepage12HrDisplay() {
       .format("dddd, MMM D, YYYY");
     melbourneTimeElement.innerHTML = moment()
       .tz("Australia/Melbourne")
-      .format("h:mm:ss:SSS [<small>]A[</small>]");
+      .format("h:mm:ss [<small>]A[</small>]");
   }
 
   let longyearbyenElement = document.querySelector("#longyearbyen-time");
@@ -32,7 +32,7 @@ function homepage12HrDisplay() {
       .format("dddd, MMM D, YYYY");
     longyearbyenTimeElement.innerHTML = moment()
       .tz("Arctic/longyearbyen")
-      .format("h:mm:ss:SSS [<small>]A[</small>]");
+      .format("h:mm:ss [<small>]A[</small>]");
   }
   let timeFormatLinkElement = document.querySelector("#time-format-link");
   timeFormatLinkElement.classList.add("switch-page");
@@ -51,7 +51,7 @@ function homepage24HrDisplay(event) {
       .format("dddd, MMM D, YYYY");
     torontoTimeElement.innerHTML = moment()
       .tz("America/Toronto")
-      .format("H:mm:ss:SSS");
+      .format("H:mm:ss");
   }
 
   let melbourneElement = document.querySelector("#melbourne-time");
@@ -63,7 +63,7 @@ function homepage24HrDisplay(event) {
       .format("dddd, MMM D, YYYY");
     melbourneTimeElement.innerHTML = moment()
       .tz("Australia/Melbourne")
-      .format("H:mm:ss:SSS");
+      .format("H:mm:ss");
   }
 
   let longyearbyenElement = document.querySelector("#longyearbyen-time");
@@ -75,7 +75,7 @@ function homepage24HrDisplay(event) {
       .format("dddd, MMM D, YYYY");
     longyearbyenTimeElement.innerHTML = moment()
       .tz("Arctic/longyearbyen")
-      .format("H:mm:ss:SSS");
+      .format("H:mm:ss");
   }
 
   let timeFormatLinkElement = document.querySelector("#time-format-link");
@@ -148,4 +148,3 @@ let selectTimeFormatElement = document.querySelector("#select-time-format");
 selectTimeFormatElement.addEventListener("change", displaySelectedCity);
 
 homepage12HrDisplay();
-// setInterval(homepage12HrDisplay, 10);
