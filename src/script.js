@@ -103,7 +103,6 @@ function twentyFourHourClock(event) {
   let timeFormatLinkElement = document.querySelector("#time-format-link");
   timeFormatLinkElement.remove("#time-format-link");
 }
-
 function twelveHourClock(event) {
   let timeZone = event.target.value;
   if (timeZone === "current") {
