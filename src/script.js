@@ -1,4 +1,22 @@
-function userGreeting(){
+function userTime12Hr() {
+  let userTimeZone = moment.tz.guess();
+  let userTime = document.querySelector("#user-time");
+  userTime.innerHTML = ` It's currently ${moment()
+    .tz(userTimeZone)
+    .format("ddd, MMM D,")}${moment()
+    .tz(userTimeZone)
+    .format(" h:mm A")} in your location.`;
+}
+
+function userTime24Hr() {
+  let userTimeZone = moment.tz.guess();
+  let userTime = document.querySelector("#user-time");
+  userTime.innerHTML = ` It's currently ${moment()
+    .tz(userTimeZone)
+    .format("ddd, MMM D,")}${moment().tz(userTimeZone).format(" H:mm")} in your location.`;
+}
+
+function userGreeting() {
   let userGreeting = document.querySelector("#user-greeting");
   let userTimeZone = moment.tz.guess();
   let userHour = moment().tz(userTimeZone).format("H");
@@ -15,6 +33,7 @@ function userGreeting(){
 
 function homepage12HrDisplay() {
   userGreeting();
+  userTime12Hr();
   let torontoElement = document.querySelector("#toronto-time");
   if (torontoElement) {
     let torontoDateElement = torontoElement.querySelector(".date");
@@ -58,6 +77,7 @@ function homepage12HrDisplay() {
 }
 
 function homepage24HrDisplay(event) {
+  userTime24Hr();
   let torontoElement = document.querySelector("#toronto-time");
   if (torontoElement) {
     let torontoDateElement = torontoElement.querySelector(".date");
@@ -100,27 +120,8 @@ function homepage24HrDisplay(event) {
   timeFormatLinkElement.addEventListener("click", homepage12HrDisplay);
 }
 
-function twentyFourHourClock(event) {
-  let timeZone = event.target.value;
-  if (timeZone === "current") {
-    timeZone = moment.tz.guess();
-  }
-  if (timeZone.length > 1) {
-    let cityName = timeZone.replace("_", " ").split("/")[1];
-    let cityElement = document.querySelector("#cities");
-    cityElement.innerHTML = `<div class="each-city">
-    <div class="city-and-date">
-    <h2>${cityName}</h2>
-    <div class="date">${moment().tz(timeZone).format("dddd, MMM D, YYYY")}</div>
-      </div>
-      <div class="time">${moment().tz(timeZone).format("H:mm:ss")} 
-          </div></div>`;
-    let timeFormatLinkElement = document.querySelector("#time-format-link");
-    timeFormatLinkElement.innerHTML = `Back to Homepage`;
-    timeFormatLinkElement.setAttribute("href", "/");
-  }
-}
 function twelveHourClock(event) {
+  userTime12Hr();
   let timeZone = event.target.value;
   if (timeZone === "current") {
     timeZone = moment.tz.guess();
@@ -132,18 +133,40 @@ function twelveHourClock(event) {
     <div class="city-and-date">
     <h2>${cityName}</h2>
     <div class="date">${moment().tz(timeZone).format("dddd, MMM D, YYYY")}</div>
-      </div>
-      <div class="time">${moment()
-        .tz(timeZone)
-        .format("h:mm:ss")} <small>${moment()
+    </div>
+    <div class="time">${moment()
       .tz(timeZone)
-      .format("A")}</small></div>
-          </div>`;
-    let timeFormatLinkElement = document.querySelector("#time-format-link");
-    timeFormatLinkElement.innerHTML = `Back to Homepage`;
-    timeFormatLinkElement.setAttribute("href","/");
-  }
-}
+      .format("h:mm:ss")} <small>${moment()
+        .tz(timeZone)
+        .format("A")}</small></div>
+        </div>`;
+        let timeFormatLinkElement = document.querySelector("#time-format-link");
+        timeFormatLinkElement.innerHTML = `Back to Homepage`;
+        timeFormatLinkElement.setAttribute("href", "/");
+      }
+    }
+
+    function twentyFourHourClock(event) {
+      userTime24Hr();
+      let timeZone = event.target.value;
+      if (timeZone === "current") {
+        timeZone = moment.tz.guess();
+      }
+      if (timeZone.length > 1) {
+        let cityName = timeZone.replace("_", " ").split("/")[1];
+        let cityElement = document.querySelector("#cities");
+        cityElement.innerHTML = `<div class="each-city">
+        <div class="city-and-date">
+        <h2>${cityName}</h2>
+        <div class="date">${moment().tz(timeZone).format("dddd, MMM D, YYYY")}</div>
+          </div>
+          <div class="time">${moment().tz(timeZone).format("H:mm:ss")} 
+              </div></div>`;
+        let timeFormatLinkElement = document.querySelector("#time-format-link");
+        timeFormatLinkElement.innerHTML = `Back to Homepage`;
+        timeFormatLinkElement.setAttribute("href", "/");
+      }
+    }
 
 function displaySelectedCity(event) {
   let selectedTimeFormat = event.target.value;
