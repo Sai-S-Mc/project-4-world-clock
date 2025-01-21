@@ -6,7 +6,7 @@ body {
 }
 .world-clock-container {
   background-color: rgba(255, 255, 255, 0.86);
-  max-width: 600px;
+  max-width: 605px;
   margin: 60px auto;
   border-radius: 15px;
   box-shadow: 5px 5px 10px rgba(128, 128, 128, 0.3);
@@ -28,12 +28,12 @@ select {
 select:hover {
   cursor: pointer;
 }
-#select-time-format {
-  margin-right: 5px;
-  width: 32%;
+.select-items {
+  display: flex;
+  justify-content: center;
 }
-#select-city {
-  width: 32%;
+#select-time-format {
+  margin-right: 8px;
 }
 .user-greeting {
   padding: 0 10px;
@@ -45,6 +45,7 @@ select:hover {
 }
 .cities {
   padding: 15px 5px 0;
+  margin: auto 5px;
 }
 .each-city {
   margin: 30px 10px;
@@ -96,7 +97,7 @@ footer {
   text-align: center;
   font-size: 14px;
   color: rgba(0, 0, 0, 0.7);
-  padding: 20px 0;
+  padding: 20px 5px;
   background-color: rgba(255, 255, 255, 0.86);
   max-width: 600px;
   border-radius: 15px;
@@ -121,4 +122,37 @@ footer a:hover {
   cursor: pointer;
   color: rgba(30, 30, 30, 0.903);
   text-decoration: none;
+}
+
+@media (max-width :600px) {
+  h1 {
+    font-size: 29px;
+  }
+  .select-items{
+    flex-direction: column;
+  }
+  #select-time-format {
+    margin-right: 0;
+    text-align: center;
+  }
+  #select-city{
+    margin-top: 10px;
+    text-align: center;
+  }
+  .each-city {
+    flex-direction: column;
+    text-align: center;
+  }
+  .time {
+    font-size: 26px;
+  }
+}
+
+@media (max-width : 400px) {
+  h1 {
+    font-size: 26px;
+  }
+  .time {
+    font-size: 24px;
+  }
 }
