@@ -125,6 +125,13 @@ footer a:hover {
 }
 
 @media (max-width :600px) {
+  body{
+    background-image: radial-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, -0.5)),
+    url("../media/single-clock.jpg");
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
   h1 {
     font-size: 29px;
   }
