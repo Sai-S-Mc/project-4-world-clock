@@ -18,19 +18,25 @@ function userTime24Hr() {
     .format(" H:mm")} in your location.`;
 }
 
+function formatGreeting(hour) {
+  if (hour >= 5 && hour < 21) {
+    if (hour < 12) {
+      return "Good Morning.";
+    } else if (hour < 17) {
+      return "Good Afternoon.";
+    } else {
+      return "Good Evening.";
+    }
+  } else {
+    return "Good Night.";
+  }
+}
+
 function userGreeting() {
-  let userGreeting = document.querySelector("#user-greeting");
   let userTimeZone = moment.tz.guess();
   let userHour = moment().tz(userTimeZone).format("H");
-  if (userHour >= 5 && userHour < 12) {
-    userGreeting.innerHTML = "Good Morning.";
-  } else if (userHour >= 12 && userHour < 17) {
-    userGreeting.innerHTML = "Good Afternoon.";
-  } else if (userHour >= 17 && userHour < 21) {
-    userGreeting.innerHTML = "Good Evening.";
-  } else {
-    userGreeting.innerHTML = "Good Night.";
-  }
+  let userGreeting = document.querySelector("#user-greeting");
+  userGreeting.innerHTML = formatGreeting(userHour);
 }
 
 function homepage12HrDisplay() {
