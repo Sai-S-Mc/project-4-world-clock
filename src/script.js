@@ -1,21 +1,23 @@
-function userTime12Hr() {
-  let userTimeZone = moment.tz.guess();
-  let userTime = document.querySelector("#user-time");
-  userTime.innerHTML = ` It's currently ${moment()
-    .tz(userTimeZone)
-    .format("ddd, MMM D,")}${moment()
-    .tz(userTimeZone)
-    .format(" h:mm A")} in your location.`;
+function userTime12Hr(momentTZ) {
+  return momentTZ.format(" h:mm A");
 }
 
-function userTime24Hr() {
+function userTime24Hr(momentTZ) {
+  return momentTZ.format(" H:mm");
+}
+
+function userTime(format = "12") {
   let userTimeZone = moment.tz.guess();
-  let userTime = document.querySelector("#user-time");
-  userTime.innerHTML = ` It's currently ${moment()
-    .tz(userTimeZone)
-    .format("ddd, MMM D,")}${moment()
-    .tz(userTimeZone)
-    .format(" H:mm")} in your location.`;
+  let momentTimeZone = moment().tz(userTimeZone);
+  let userTimeElement = document.querySelector("#user-time");
+  let userDate = momentTimeZone.format("ddd, MMM D,");
+  let userTime;
+  if (format !== "12") {
+    userTime = userTime24Hr(momentTimeZone);
+  } else {
+    userTime = userTime12Hr(momentTimeZone);
+  }
+  userTimeElement.innerHTML = `It is currently ${userDate}${userTime} in your location.`;
 }
 
 function formatGreeting(hour) {
@@ -41,7 +43,7 @@ function userGreeting() {
 
 function homepage12HrDisplay() {
   userGreeting();
-  userTime12Hr();
+  userTime();
   let torontoElement = document.querySelector("#toronto-time");
   if (torontoElement) {
     let torontoDateElement = torontoElement.querySelector(".date");
@@ -85,7 +87,7 @@ function homepage12HrDisplay() {
 }
 
 function homepage24HrDisplay(event) {
-  userTime24Hr();
+  userTime("24");
   let torontoElement = document.querySelector("#toronto-time");
   if (torontoElement) {
     let torontoDateElement = torontoElement.querySelector(".date");
