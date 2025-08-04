@@ -44,41 +44,29 @@ function userGreeting() {
 function homepage12HrDisplay() {
   userGreeting();
   userTime();
-  let torontoElement = document.querySelector("#toronto-time");
-  if (torontoElement) {
-    let torontoDateElement = torontoElement.querySelector(".date");
-    let torontoTimeElement = torontoElement.querySelector(".time");
-    torontoDateElement.innerHTML = moment()
-      .tz("America/Toronto")
-      .format("dddd, MMM D, YYYY");
-    torontoTimeElement.innerHTML = moment()
-      .tz("America/Toronto")
-      .format("h:mm:ss [<small>]A[</small>]");
-  }
 
-  let melbourneElement = document.querySelector("#melbourne-time");
-  if (melbourneElement) {
-    let melbourneDateElement = melbourneElement.querySelector(".date");
-    let melbourneTimeElement = melbourneElement.querySelector(".time");
-    melbourneDateElement.innerHTML = moment()
-      .tz("Australia/Melbourne")
-      .format("dddd, MMM D, YYYY");
-    melbourneTimeElement.innerHTML = moment()
-      .tz("Australia/Melbourne")
-      .format("h:mm:ss [<small>]A[</small>]");
-  }
+  // Add default city IDs and respective timezones to arrays 
+  let elementIDs = ["#toronto-time", "#melbourne-time", "#longyearbyen-time"];
+  let timeZones = [
+    "America/Toronto",
+    "Australia/Melbourne",
+    "Arctic/longyearbyen",
+  ];
 
-  let longyearbyenElement = document.querySelector("#longyearbyen-time");
-  if (longyearbyenElement) {
-    let longyearbyenDateElement = longyearbyenElement.querySelector(".date");
-    let longyearbyenTimeElement = longyearbyenElement.querySelector(".time");
-    longyearbyenDateElement.innerHTML = moment()
-      .tz("Arctic/longyearbyen")
-      .format("dddd, MMM D, YYYY");
-    longyearbyenTimeElement.innerHTML = moment()
-      .tz("Arctic/longyearbyen")
-      .format("h:mm:ss [<small>]A[</small>]");
-  }
+  //Loop through each city element and inject respective date and time based on its time zone 
+  elementIDs.forEach((id, index) => {
+    let element = document.querySelector(id);
+    if (element) {
+      let momentTimeZone = moment().tz(timeZones[index]);
+      let dateElement = element.querySelector(".date");
+      let timeElement = element.querySelector(".time");
+      dateElement.innerHTML = momentTimeZone.format("dddd, MMM D, YYYY");
+      timeElement.innerHTML = momentTimeZone.format(
+        "h:mm:ss [<small>]A[</small>]"
+      );
+    }
+  });
+
   let timeFormatLinkElement = document.querySelector("#time-format-link");
   timeFormatLinkElement.classList.add("switch-page");
   timeFormatLinkElement.innerHTML = `Switch to 24 Hour Format`;
