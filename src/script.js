@@ -65,109 +65,54 @@
 //   }
 // }
 
-// let selectTimeFormatElement = document.querySelector("#select-time-format");
-// selectTimeFormatElement.addEventListener("change", displaySelectedCity);
-// function homepage24HrDisplay(event) {
-//   userTime("24");
-//   let torontoElement = document.querySelector("#toronto-time");
-//   if (torontoElement) {
-//     let torontoDateElement = torontoElement.querySelector(".date");
-//     let torontoTimeElement = torontoElement.querySelector(".time");
-//     torontoDateElement.innerHTML = moment()
-//       .tz("America/Toronto")
-//       .format("dddd, MMM D, YYYY");
-//     torontoTimeElement.innerHTML = moment()
-//       .tz("America/Toronto")
-//       .format("H:mm:ss");
-//   }
-
-//   let melbourneElement = document.querySelector("#melbourne-time");
-//   if (melbourneElement) {
-//     let melbourneDateElement = melbourneElement.querySelector(".date");
-//     let melbourneTimeElement = melbourneElement.querySelector(".time");
-//     melbourneDateElement.innerHTML = moment()
-//       .tz("Australia/Melbourne")
-//       .format("dddd, MMM D, YYYY");
-//     melbourneTimeElement.innerHTML = moment()
-//       .tz("Australia/Melbourne")
-//       .format("H:mm:ss");
-//   }
-
-//   let longyearbyenElement = document.querySelector("#longyearbyen-time");
-//   if (longyearbyenElement) {
-//     let longyearbyenDateElement = longyearbyenElement.querySelector(".date");
-//     let longyearbyenTimeElement = longyearbyenElement.querySelector(".time");
-//     longyearbyenDateElement.innerHTML = moment()
-//       .tz("Arctic/longyearbyen")
-//       .format("dddd, MMM D, YYYY");
-//     longyearbyenTimeElement.innerHTML = moment()
-//       .tz("Arctic/longyearbyen")
-//       .format("H:mm:ss");
-//   }
-
-//   let timeFormatLinkElement = document.querySelector("#time-format-link");
-//   timeFormatLinkElement.innerHTML = `Switch to 12 Hour Format`;
-//   timeFormatLinkElement.removeEventListener("click", homepage24HrDisplay);
-//   timeFormatLinkElement.addEventListener("click", homepage12HrDisplay);
-// }
-
-// function userTime12Hr(momentTZ) {
-//   return momentTZ.format(" h:mm A");
-// }
-
-// function userTime24Hr(momentTZ) {
-//   return momentTZ.format(" H:mm");
-// }
-
-// function userTime(format = "12") {
-//   let userTimeZone = moment.tz.guess();
-//   let momentTimeZone = moment().tz(userTimeZone);
-//   let userTimeElement = document.querySelector("#user-time");
-//   let userDate = momentTimeZone.format("ddd, MMM D,");
-//   let userTime;
-//   if (format !== "12") {
-//     userTime = userTime24Hr(momentTimeZone);
-//   } else {
-//     userTime = userTime12Hr(momentTimeZone);
-//   }
-//   userTimeElement.innerHTML = `It is currently ${userDate}${userTime} in your location.`;
-// }
-
-// function formatGreeting(hour) {
-//   if (hour >= 5 && hour < 21) {
-//     if (hour < 12) {
-//       return "Good Morning.";
-//     } else if (hour < 17) {
-//       return "Good Afternoon.";
-//     } else {
-//       return "Good Evening.";
-//     }
-//   } else {
-//     return "Good Night.";
-//   }
-// }
-
-// function userGreeting() {
-//   let userTimeZone = moment.tz.guess();
-//   let userHour = moment().tz(userTimeZone).format("H");
-//   let userGreeting = document.querySelector("#user-greeting");
-//   userGreeting.innerHTML = formatGreeting(userHour);
-// }
-
-function displayDate(momentTz) {
+function formatDate(momentTz) {
   date = momentTz.format("dddd, MMM D, YYYY");
   return date;
 }
 
-function displayTime(momentTz, format) {
+function formatTime(momentTz, format) {
   if (format === "24") {
-    return momentTz.format("H:mm:ss");
+    return momentTz.format(
+      "H:mm[<span class = 'seconds-display'>]:ss[</span>]"
+    );
   } else {
-    return momentTz.format("h:mm:ss [<small>]A[</small>]");
+    return momentTz.format(
+      "h:mm[<span class = 'seconds-display'>]:ss[</span>][<span class = 'time-suffix'>] A[</span>]"
+    );
   }
 }
 
-function updateTimeFormat() {
+function formatGreetingDate(momentTz) {
+  return momentTz.format("ddd, MMM D");
+}
+
+function formatGreeting(momentTz) {
+  let hour = momentTz.format("H");
+  if (hour >= 5 && hour < 21) {
+    if (hour < 12) {
+      return "Good Morning.";
+    } else if (hour < 17) {
+      return "Good Afternoon.";
+    } else {
+      return "Good Evening.";
+    }
+  } else {
+    return "Good Night.";
+  }
+}
+
+function userGreetingDisplay(format) {
+  let userTimezone = moment.tz.guess();
+  let momentTimezone = moment().tz(userTimezone);
+  let userGreeting = formatGreeting(momentTimezone);
+  let userDate = formatGreetingDate(momentTimezone);
+  let userTime = formatTime(momentTimezone, format);
+
+  let userGreetingElement = document.querySelector(".user-greeting-display");
+  userGreetingElement.innerHTML = `${userGreeting} It's currently ${userDate}, ${userTime} in your location.`;
+}
+
+function updateTimeFormatAndLink() {
   let timeFormatLinkElement = document.querySelector("#time-format-link");
   timeFormatLinkElement.classList.add("switch-format");
   timeFormatLinkElement.classList.toggle("format-24-hr");
@@ -181,12 +126,15 @@ function updateTimeFormat() {
 }
 
 function homepageDisplay(event) {
-  if(event){
-    event.preventDefault()
+  if (event) {
+    event.preventDefault();
   }
+
   // userGreeting();
   // userTime("12");
-  let timeFormat = updateTimeFormat();
+  let timeFormat = updateTimeFormatAndLink();
+
+  userGreetingDisplay(timeFormat);
 
   // Add default city IDs and respective timezones to an array of objects
   let defaultDisplay = [
@@ -213,8 +161,8 @@ function homepageDisplay(event) {
     let timezone = city.timezone;
     let momentTimezone = moment().tz(timezone);
 
-    dateElement.innerHTML = displayDate(momentTimezone);
-    timeElement.innerHTML = displayTime(momentTimezone, timeFormat);
+    dateElement.innerHTML = formatDate(momentTimezone);
+    timeElement.innerHTML = formatTime(momentTimezone, timeFormat);
   });
 }
 
