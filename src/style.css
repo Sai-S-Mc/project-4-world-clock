@@ -10,6 +10,9 @@ body {
     url("../media/clocks-1.jpg");
   background-size: cover;
 }
+.hidden{
+  display:none !important 
+}
 .world-clock-container,
 .each-city,
 footer {
@@ -83,19 +86,19 @@ select:hover {
   font-size: 33px;
   font-weight: 800;
 }
- .cities .time-suffix{
+.cities .time-suffix {
   opacity: 0.8;
   font-size: 18px;
   margin-left: 12px;
 }
-.switch-format {
+.switch-format, #homepage-link {
   color: var(--muted-text);
   display: block;
   font-size: 13.5px;
   font-weight: 600;
   transition: var(--transition);
 }
-.switch-format:hover {
+.switch-format:hover, #homepage-link:hover {
   color: var(--primary-text);
   font-size: 13.7px;
 }

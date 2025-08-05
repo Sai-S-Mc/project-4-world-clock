@@ -23,6 +23,12 @@ function displaySelectedCity(event) {
   if (event) {
     event.preventDefault();
   }
+
+  let homepageLinkElement = document.querySelector("#homepage-link");
+  homepageLinkElement.classList.remove("hidden");
+  let timeFormatLinkElement = document.querySelector("#time-format-link");
+  timeFormatLinkElement.classList.add("hidden");
+
   let timezone;
   let timeFormat;
   let timeFormatSelectElement = document.querySelector("#select-time-format");
@@ -107,7 +113,8 @@ function homepageDisplay(event) {
   }
 
   let timeFormat = updateHomepageTimeFormatAndLink();
-
+  let homepageLinkElement = document.querySelector("#homepage-link");
+  homepageLinkElement.classList.add("hidden");
   userGreetingDisplay(timeFormat);
 
   // Add default city IDs and respective timezones to an array of objects
