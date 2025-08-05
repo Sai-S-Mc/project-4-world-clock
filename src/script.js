@@ -1,77 +1,5 @@
-// function twelveHourClock(event) {
-//   userTime12Hr();
-//   let timeZone = event.target.value;
-//   if (timeZone === "current") {
-//     timeZone = moment.tz.guess();
-//   }
-//   if (timeZone.length > 1) {
-//     let cityName = timeZone.replace("_", " ").split("/")[1];
-//     let cityElement = document.querySelector("#cities");
-//     cityElement.innerHTML = `<div class="each-city">
-//     <div class="city-and-date">
-//     <h2>${cityName}</h2>
-//     <div class="date">${moment().tz(timeZone).format("dddd, MMM D, YYYY")}</div>
-//     </div>
-//     <div class="time">${moment()
-//       .tz(timeZone)
-//       .format("h:mm:ss")} <small>${moment()
-//       .tz(timeZone)
-//       .format("A")}</small></div>
-//         </div>`;
-//     let timeFormatLinkElement = document.querySelector("#time-format-link");
-//     timeFormatLinkElement.innerHTML = `Back to Homepage`;
-//     timeFormatLinkElement.setAttribute("href", "/");
-//     timeFormatLinkElement.setAttribute("title", "Homepage");
-//   }
-// }
-
-// function twentyFourHourClock(event) {
-//   userTime24Hr();
-//   let timeZone = event.target.value;
-//   if (timeZone === "current") {
-//     timeZone = moment.tz.guess();
-//   }
-//   if (timeZone.length > 1) {
-//     let cityName = timeZone.replace("_", " ").split("/")[1];
-//     let cityElement = document.querySelector("#cities");
-//     cityElement.innerHTML = `<div class="each-city">
-//     <div class="city-and-date">
-//     <h2>${cityName}</h2>
-//         <div class="date">${moment()
-//           .tz(timeZone)
-//           .format("dddd, MMM D, YYYY")}</div>
-//           </div>
-//           <div class="time">${moment().tz(timeZone).format("H:mm:ss")}
-//           </div></div>`;
-//     let timeFormatLinkElement = document.querySelector("#time-format-link");
-//     timeFormatLinkElement.innerHTML = `Back to Homepage`;
-//     timeFormatLinkElement.setAttribute("href", "/");
-//     timeFormatLinkElement.setAttribute("title", "Homepage");
-//   }
-// }
-
-// function displaySelectedCity(event) {
-//   let selectedTimeFormat = event.target.value;
-//   if (selectedTimeFormat.length > 1) {
-//     if (selectedTimeFormat === "twelve-hour") {
-//       let selectCityElement = document.querySelector("#select-city");
-//       selectCityElement.removeEventListener("change", twentyFourHourClock);
-//       selectCityElement.addEventListener("change", twelveHourClock);
-//     } else {
-//       let selectCityElement = document.querySelector("#select-city");
-//       selectCityElement.removeEventListener("change", twelveHourClock);
-//       selectCityElement.addEventListener("change", twentyFourHourClock);
-//     }
-//   }
-// }
-
-function formatDate(momentTz) {
-  date = momentTz.format("dddd, MMM D, YYYY");
-  return date;
-}
-
 function formatTime(momentTz, format) {
-  if (format === "24") {
+  if (format === "twenty-four-hour") {
     return momentTz.format(
       "H:mm[<span class = 'seconds-display'>]:ss[</span>]"
     );
@@ -80,6 +8,54 @@ function formatTime(momentTz, format) {
       "h:mm[<span class = 'seconds-display'>]:ss[</span>][<span class = 'time-suffix'>] A[</span>]"
     );
   }
+}
+
+function formatDate(momentTz) {
+  date = momentTz.format("dddd, MMM D, YYYY");
+  return date;
+}
+
+function handleTimeFormatSelectionChange() {
+  displaySelectedCity();
+}
+
+function displaySelectedCity(event) {
+  if (event) {
+    event.preventDefault();
+  }
+  let timezone;
+  let timeFormat;
+  let timeFormatSelectElement = document.querySelector("#select-time-format");
+
+  if (event) {
+    timezone = event.target.value;
+  } else {
+    timezone = document.querySelector("#select-city").value;
+  }
+
+  if (timezone.length > 1) {
+    if (timezone === "current") {
+      timezone = moment.tz.guess();
+    }
+    let momentTimezone = moment().tz(timezone);
+    timeFormat = timeFormatSelectElement.value;
+    let cityName = timezone.replace("_", " ").split("/")[1];
+    let date = formatDate(momentTimezone);
+    let time = formatTime(momentTimezone, timeFormat);
+    let cityElement = document.querySelector("#cities");
+    cityElement.innerHTML = `<div class="each-city">
+    <div class="city-and-date">
+    <h2>${cityName}</h2>
+    <div class="date">${date}</div>
+    </div>
+    <div class="time">${time}
+    </div></div>`;
+  }
+  userGreetingDisplay(timeFormat);
+  timeFormatSelectElement.addEventListener(
+    "change",
+    handleTimeFormatSelectionChange
+  );
 }
 
 function formatGreetingDate(momentTz) {
@@ -112,16 +88,16 @@ function userGreetingDisplay(format) {
   userGreetingElement.innerHTML = `${userGreeting} It's currently ${userDate}, ${userTime} in your location.`;
 }
 
-function updateTimeFormatAndLink() {
+function updateHomepageTimeFormatAndLink() {
   let timeFormatLinkElement = document.querySelector("#time-format-link");
   timeFormatLinkElement.classList.add("switch-format");
   timeFormatLinkElement.classList.toggle("format-24-hr");
   if (timeFormatLinkElement.classList.contains("format-24-hr")) {
     timeFormatLinkElement.innerHTML = "Switch to 24 Hour Format";
-    return "12";
+    return "twelve-hour";
   } else {
     timeFormatLinkElement.innerHTML = "Switch to 12 Hour Format";
-    return "24";
+    return "twenty-four-hour";
   }
 }
 
@@ -130,9 +106,7 @@ function homepageDisplay(event) {
     event.preventDefault();
   }
 
-  // userGreeting();
-  // userTime("12");
-  let timeFormat = updateTimeFormatAndLink();
+  let timeFormat = updateHomepageTimeFormatAndLink();
 
   userGreetingDisplay(timeFormat);
 
@@ -153,16 +127,17 @@ function homepageDisplay(event) {
   ];
 
   //Loop through the object to calculate date and time based on their respective timezones and inject the same in HTML
-
   defaultDisplay.forEach((city) => {
     let element = document.querySelector(city.id);
-    let dateElement = element.querySelector(".date");
-    let timeElement = element.querySelector(".time");
-    let timezone = city.timezone;
-    let momentTimezone = moment().tz(timezone);
+    if (element) {
+      let dateElement = element.querySelector(".date");
+      let timeElement = element.querySelector(".time");
+      let timezone = city.timezone;
+      let momentTimezone = moment().tz(timezone);
 
-    dateElement.innerHTML = formatDate(momentTimezone);
-    timeElement.innerHTML = formatTime(momentTimezone, timeFormat);
+      dateElement.innerHTML = formatDate(momentTimezone);
+      timeElement.innerHTML = formatTime(momentTimezone, timeFormat);
+    }
   });
 }
 
@@ -170,3 +145,6 @@ homepageDisplay();
 
 let timeFormatLinkElement = document.querySelector("#time-format-link");
 timeFormatLinkElement.addEventListener("click", homepageDisplay);
+
+let selectCityElement = document.querySelector("#select-city");
+selectCityElement.addEventListener("change", displaySelectedCity);
