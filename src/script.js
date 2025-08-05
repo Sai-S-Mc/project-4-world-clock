@@ -41,7 +41,7 @@
 //           .tz(timeZone)
 //           .format("dddd, MMM D, YYYY")}</div>
 //           </div>
-//           <div class="time">${moment().tz(timeZone).format("H:mm:ss")} 
+//           <div class="time">${moment().tz(timeZone).format("H:mm:ss")}
 //           </div></div>`;
 //     let timeFormatLinkElement = document.querySelector("#time-format-link");
 //     timeFormatLinkElement.innerHTML = `Back to Homepage`;
@@ -167,9 +167,26 @@ function displayTime(momentTz, format) {
   }
 }
 
-function homepageDisplay() {
+function updateTimeFormat() {
+  let timeFormatLinkElement = document.querySelector("#time-format-link");
+  timeFormatLinkElement.classList.add("switch-format");
+  timeFormatLinkElement.classList.toggle("format-24-hr");
+  if (timeFormatLinkElement.classList.contains("format-24-hr")) {
+    timeFormatLinkElement.innerHTML = "Switch to 24 Hour Format";
+    return "12";
+  } else {
+    timeFormatLinkElement.innerHTML = "Switch to 12 Hour Format";
+    return "24";
+  }
+}
+
+function homepageDisplay(event) {
+  if(event){
+    event.preventDefault()
+  }
   // userGreeting();
   // userTime("12");
+  let timeFormat = updateTimeFormat();
 
   // Add default city IDs and respective timezones to an array of objects
   let defaultDisplay = [
@@ -195,17 +212,13 @@ function homepageDisplay() {
     let timeElement = element.querySelector(".time");
     let timezone = city.timezone;
     let momentTimezone = moment().tz(timezone);
-    let timeDisplayFormat = "12";
 
     dateElement.innerHTML = displayDate(momentTimezone);
-    timeElement.innerHTML = displayTime(momentTimezone, timeDisplayFormat);
+    timeElement.innerHTML = displayTime(momentTimezone, timeFormat);
   });
-
-  let timeFormatLinkElement = document.querySelector("#time-format-link");
-  timeFormatLinkElement.classList.add("switch-page");
-  timeFormatLinkElement.innerHTML = `Switch to 24 Hour Format`;
-  timeFormatLinkElement.removeEventListener("click", homepage12HrDisplay);
-  timeFormatLinkElement.addEventListener("click", homepage24HrDisplay);
 }
 
 homepageDisplay();
+
+let timeFormatLinkElement = document.querySelector("#time-format-link");
+timeFormatLinkElement.addEventListener("click", homepageDisplay);
