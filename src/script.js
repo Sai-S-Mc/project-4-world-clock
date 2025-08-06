@@ -1,3 +1,19 @@
+function handleErrors(error = "") {
+  let mainElement = document.querySelector("main");
+  mainElement.classList.add("error-message");
+  let message;
+  if (error === "location blocked") {
+    message =
+      "We attempted to guess your time... but your VPN said no.</br>Respect.🫡";
+  } else if (error === "greeting location blocked") {
+    message = `We can't find your time—you've got a VPN-visibility cloak on.`;
+  } else {
+    document.querySelector(".select-items").classList.add("hidden");
+    message = `Oops! The space-time continuum broke💥<br/>Please try again later.`;
+  }
+  mainElement.innerHTML = message;
+}
+
 function formatTime(momentTz, format) {
   if (format === "twenty-four-hour") {
     return momentTz.format(
@@ -41,7 +57,11 @@ function displaySelectedCity(event) {
 
   if (timezone.length > 1) {
     if (timezone === "current") {
-      timezone = moment.tz.guess();
+      timezone = moment.tz.guess(true);
+      if (!timezone) {
+        handleErrors("location blocked");
+        return;
+      }
     }
     let momentTimezone = moment().tz(timezone);
     timeFormat = timeFormatSelectElement.value;
@@ -84,7 +104,11 @@ function formatGreeting(momentTz) {
 }
 
 function userGreetingDisplay(format) {
-  let userTimezone = moment.tz.guess();
+  let userTimezone = moment.tz.guess(true);
+  if (!userTimezone) {
+    handleErrors("greeting location blocked");
+    return;
+  }
   let momentTimezone = moment().tz(userTimezone);
   let userGreeting = formatGreeting(momentTimezone);
   let userDate = formatGreetingDate(momentTimezone);
@@ -150,17 +174,12 @@ function homepageDisplay(event) {
 
 try {
   homepageDisplay();
+
+  let timeFormatLinkElement = document.querySelector("#time-format-link");
+  timeFormatLinkElement.addEventListener("click", homepageDisplay);
+
+  let selectCityElement = document.querySelector("#select-city");
+  selectCityElement.addEventListener("change", displaySelectedCity);
 } catch {
-  document.querySelector(".select-items").classList.add("hidden");
-  let mainElement = document.querySelector("main");
-  mainElement.classList.add("error-message");
-  document.querySelector(
-    "main"
-  ).innerHTML = `Oops! The space-time continuum broke💥<br/>Please try again later.`;
+  handleErrors();
 }
-
-let timeFormatLinkElement = document.querySelector("#time-format-link");
-timeFormatLinkElement.addEventListener("click", homepageDisplay);
-
-let selectCityElement = document.querySelector("#select-city");
-selectCityElement.addEventListener("change", displaySelectedCity);
