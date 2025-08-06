@@ -148,7 +148,16 @@ function homepageDisplay(event) {
   });
 }
 
-homepageDisplay();
+try {
+  homepageDisplay();
+} catch {
+  document.querySelector(".select-items").classList.add("hidden");
+  let mainElement = document.querySelector("main");
+  mainElement.classList.add("error-message");
+  document.querySelector(
+    "main"
+  ).innerHTML = `Oops! The space-time continuum broke💥<br/>Please try again later.`;
+}
 
 let timeFormatLinkElement = document.querySelector("#time-format-link");
 timeFormatLinkElement.addEventListener("click", homepageDisplay);

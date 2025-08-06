@@ -10,10 +10,11 @@ body {
     url("../media/clocks-1.jpg");
   background-size: cover;
 }
-.hidden{
-  display:none !important 
+.hidden {
+  display: none !important;
 }
 .world-clock-container,
+.error-message,
 .each-city,
 footer {
   border-radius: var(--border-radius);
@@ -59,14 +60,22 @@ select:hover {
   padding: 15px 5px 0;
   margin: auto 5px;
 }
-.each-city {
+
+.each-city,
+.error-message {
   background-color: rgb(174 174 174 / 40%);
   border: 1px solid rgba(207, 247, 247, 0.4);
+  padding: 15px 20px 20px;
+}
+.error-message {
+  width: 80%;
+  margin: 40px auto 20px;
+}
+.each-city {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 10px 10px 30px;
-  padding: 15px 20px 20px;
 }
 .city-and-date {
   text-align: left;
@@ -91,14 +100,16 @@ select:hover {
   font-size: 18px;
   margin-left: 12px;
 }
-.switch-format, #homepage-link {
+.switch-format,
+#homepage-link {
   color: var(--muted-text);
   display: block;
   font-size: 13.5px;
   font-weight: 600;
   transition: var(--transition);
 }
-.switch-format:hover, #homepage-link:hover {
+.switch-format:hover,
+#homepage-link:hover {
   color: var(--primary-text);
   font-size: 13.7px;
 }
