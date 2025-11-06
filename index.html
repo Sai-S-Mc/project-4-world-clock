@@ -26,16 +26,16 @@
     <div class="world-clock-container">
       <header>
         <h1>World Clock</h1>
-        <div class="select-items">
+        <div class="select-items" aria-label="Select a time format and a city">
           <div>
-            <select id="select-time-format">
+            <select id="select-time-format" aria-label="time format options">
               <option value="#">Select a time format</option>
               <option value="twelve-hour">12 hour clock</option>
               <option value="twenty-four-hour">24 hour clock</option>
             </select>
           </div>
           <div>
-            <select id="select-city">
+            <select id="select-city" aria-label="city options">
               <option value="#">Select a city</option>
               <option value="current">My current location</option>
               <option value="Asia/Tokyo">Tokyo</option>
@@ -76,7 +76,9 @@
           id="time-format-link"
           title="Click to switch time format"
         ></a>
-        <a href="/" id="homepage-link" title="Click to return to homepage">Back to homepage</a>
+        <a href="/" id="homepage-link" title="Click to return to homepage"
+          >Back to homepage</a
+        >
       </main>
     </div>
     <footer>
